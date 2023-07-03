@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 
 def is_safe(board, row, col, N):
@@ -17,14 +18,16 @@ def is_safe(board, row, col, N):
     return True
 
 def solve_nqueens(N):
+    # Initialize an empty board
     board = [['.' for _ in range(N)] for _ in range(N)]
     
     def backtrack(col):
-
+        # Base case: all queens are placed
         if col >= N:
             print_solution(board)
             return
         
+        # Try placing the queen in each row of the current column
         for row in range(N):
             if is_safe(board, row, col, N):
                 board[row][col] = 'Q'
@@ -32,12 +35,15 @@ def solve_nqueens(N):
                 board[row][col] = '.'
     
     def print_solution(board):
+        # Print the board configuration
         for row in board:
             print(' '.join(row))
         print()
     
+    # Start the backtracking algorithm
     backtrack(0)
 
+# Check the command-line arguments
 if len(sys.argv) != 2:
     print("Usage: nqueens N")
     sys.exit(1)
@@ -52,6 +58,6 @@ if N < 4:
     print("N must be at least 4")
     sys.exit(1)
 
-
+# Solve the N queens problem
 solve_nqueens(N)
 
